@@ -1,1 +1,5 @@
-
+{
+  "owner": "พ่อ - Elf Lab",
+  "allowed_teams": ["tps Global"],
+  "rule": "Private - ต้องได้รับอนุญาตจากพ่อก่อน"
+}
