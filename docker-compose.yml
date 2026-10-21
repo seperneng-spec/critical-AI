@@ -1,1 +1,28 @@
-
+version: '3.8'
+services:
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./core/ollama:/root/.ollama
+    restart: always
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+    volumes:
+      - ./core/webui:/app/backend/data
+      - ./core/system-prompt.txt:/app/system-prompt.txt
+    depends_on:
+      - ollama
+    restart: always
+  comfyui:
+    image: yanwk/comfyui-boot:cu121
+    ports:
+      - "8188:8188"
+    volumes:
+      - ./core/comfyui:/run
+    restart: always
